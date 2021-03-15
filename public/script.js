@@ -3,13 +3,14 @@ const videoGrid = document.getElementById('video-grid');
 const myVideo = document.createElement('video');
 myVideo.muted= true;
 
+
 var peer = new Peer(undefined, {
    path: '/peerjs',
    host: '/',
    port: '443'
 });
 
-
+var currentPeer;
 let myVideoStream;
 navigator.mediaDevices.getUserMedia({
    video: true,
@@ -17,12 +18,14 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream=>{
    myVideoStream=stream;
    addVideoStream(myVideo,stream);
+  
 
    peer.on('call',call=>{
       call.answer(stream)
       const video = document.createElement('video')
       call.on('stream', userVideoStream=>{
          addVideoStream(video, userVideoStream)
+
       })
    })
 
@@ -40,6 +43,7 @@ const connectToNewUser = (userId, stream)=>{
    const video = document.createElement('video')
    call.on('stream', userVideoStream=>{
       addVideoStream(video, userVideoStream)
+      currentPeer = call.peerConnection
    })
 }
 
@@ -51,6 +55,8 @@ const addVideoStream = (video, stream)=>{
    })
    videoGrid.append(video);
 }
+
+
 
 let text = $('input')
 
