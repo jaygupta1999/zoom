@@ -78,6 +78,12 @@ const scrollToBottom = ()=>{
    d.scrollTop(d.prop("scrollHeight"));
 }
 
+function leave(){
+  if(confirm("Are you sure you want to leave the meeting?")){
+    window.location.replace("https://www.google.com")
+  }
+}
+
 const muteUnmute = () => {
    const enabled = myVideoStream.getAudioTracks()[0].enabled;
    if (enabled) {
