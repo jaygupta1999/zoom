@@ -7,7 +7,7 @@ myVideo.muted= true;
 var peer = new Peer(undefined, {
    path: '/peerjs',
    host: '/',
-   port: '443'
+   port: '3000'
 });
 
 var currentPeer;
@@ -56,8 +56,6 @@ const addVideoStream = (video, stream)=>{
    videoGrid.append(video);
 }
 
-
-
 let text = $('input')
 
 $('html').keydown((e)=>{
@@ -83,6 +81,7 @@ function leave(){
     window.location.replace("https://www.google.com")
   }
 }
+
 
 const muteUnmute = () => {
    const enabled = myVideoStream.getAudioTracks()[0].enabled;
